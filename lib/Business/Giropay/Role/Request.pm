@@ -8,15 +8,34 @@ Business::Giropay::Role::Request - Moo::Role consumed by all Request classes
 
 use Carp;
 use Digest::HMAC_MD5 'hmac_md5_hex';
-use Business::Giropay::Types qw/Int Str/;
+use Business::Giropay::Types qw/Enum Int Str/;
 use Moo::Role;
 
-requires qw(parameters);
+requires qw(parameters uri);
 
-sub BUILD {
-    my $self = shift;
-    croak "Request classes must have attribute 'uri'" unless $self->can('uri');
-}
+=head1 ATTRIBUTES
+
+=head2 type
+
+Payment type. Currently the following types are supported:
+
+=over
+
+=item * eps
+
+=item * giropay
+
+=item * ideal
+
+=back
+
+=cut
+
+has type => (
+    is       => 'ro',
+    isa      => Enum [qw( eps giropay ideal)],
+    required => 1,
+);
 
 has base_uri => (
     is      => 'ro',

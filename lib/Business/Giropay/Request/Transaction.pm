@@ -74,10 +74,10 @@ has urlNotify => (
 
 sub BUILD {
     my $self = shift;
-    if ( $self->type =~ /^(eps|giropay)$/ ) {
+    if ( $self->gateway =~ /^(eps|giropay)$/ ) {
         croak "Missing required argument: bic" unless $self->bic;
     }
-    elsif ( $self->type eq 'ideal' ) {
+    elsif ( $self->gateway eq 'ideal' ) {
         croak "Missing required argument: issuer" unless $self->issuer;
     }
 }

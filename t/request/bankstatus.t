@@ -7,7 +7,7 @@ my $request;
 
 subtest 'no args' => sub {
     throws_ok { $request = Bankstatus->new }
-    qr/Missing required arguments: bic, merchantId, projectId, secret, type/,
+    qr/Missing required arguments: bic, gateway, merchantId, projectId, secret/,
       "Request class with no parameters method dies";
 };
 
@@ -19,7 +19,7 @@ subtest eps => sub {
             projectId  => 1234,
             bic        => 'TESTDETT421',
             secret     => 'secure',
-            type       => 'eps',
+            gateway    => 'eps',
         );
     }
     "good eps request lives";
@@ -40,7 +40,7 @@ subtest giropay => sub {
             projectId  => 1234,
             bic        => 'TESTDETT421',
             secret     => 'secure',
-            type       => 'giropay',
+            gateway    => 'giropay',
         );
     }
     "good giropay request lives";
@@ -61,7 +61,7 @@ subtest ideal => sub {
             projectId  => 1234,
             bic        => 'TESTDETT421',
             secret     => 'secure',
-            type       => 'ideal',
+            gateway    => 'ideal',
         );
     }
     qr/bankstatus request not supported by ideal/, "ideal request dies";

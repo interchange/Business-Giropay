@@ -14,7 +14,8 @@ has bic => (
 
 sub BUILD {
     my $self = shift;
-    croak "bankstatus request not supported by ideal" if $self->type eq 'ideal';
+    croak "bankstatus request not supported by ideal"
+      if $self->gateway eq 'ideal';
 }
 
 sub parameters {
@@ -22,7 +23,7 @@ sub parameters {
 }
 
 sub uri {
-    return shift->type . '/bankstatus';
+    return shift->gateway . '/bankstatus';
 }
 
 1;

@@ -8,7 +8,7 @@ my $request;
 subtest 'no args' => sub {
 
     throws_ok { $request = Transaction->new }
-qr/Missing required arguments: amount, currency, merchantId, merchantTxId, projectId, purpose, secret, type, urlNotify, urlRedirect/,
+qr/Missing required arguments: amount, currency, gateway, merchantId, merchantTxId, projectId, purpose, secret, urlNotify, urlRedirect/,
       "Request class with no parameters method dies";
 };
 
@@ -26,7 +26,7 @@ subtest eps => sub {
             urlRedirect  => 'http://www.ihre-domein.de/girocheckout/redirect',
             urlNotify    => 'http: //www.ihre-domein.de/girocheckout/notify',
             secret       => 'secure',
-            type         => 'eps',
+            gateway      => 'eps',
         );
     }
     qr/Missing required argument: bic/, "Request with missing bic dies";
@@ -45,7 +45,7 @@ subtest eps => sub {
             urlRedirect  => 'http://www.ihre-domein.de/girocheckout/redirect',
             urlNotify    => 'http: //www.ihre-domein.de/girocheckout/notify',
             secret       => 'secure',
-            type         => 'giropay',
+            gateway      => 'giropay',
         );
     }
     "good request lives";
@@ -57,7 +57,6 @@ subtest eps => sub {
       'https://payment.girosolution.de/girocheckout/api/v2/transaction/start',
       'url is good';
 };
-
 
 subtest giropay => sub {
     throws_ok {
@@ -73,7 +72,7 @@ subtest giropay => sub {
             urlRedirect  => 'http://www.ihre-domein.de/girocheckout/redirect',
             urlNotify    => 'http: //www.ihre-domein.de/girocheckout/notify',
             secret       => 'secure',
-            type         => 'giropay',
+            gateway      => 'giropay',
         );
     }
     qr/Missing required argument: bic/, "Request with no missing bic dies";
@@ -92,7 +91,7 @@ subtest giropay => sub {
             urlRedirect  => 'http://www.ihre-domein.de/girocheckout/redirect',
             urlNotify    => 'http: //www.ihre-domein.de/girocheckout/notify',
             secret       => 'secure',
-            type         => 'giropay',
+            gateway      => 'giropay',
         );
     }
     "good request lives";
@@ -119,7 +118,7 @@ subtest ideal => sub {
             urlRedirect  => 'http://www.ihre-domein.de/girocheckout/redirect',
             urlNotify    => 'http: //www.ihre-domein.de/girocheckout/notify',
             secret       => 'secure',
-            type         => 'ideal',
+            gateway      => 'ideal',
         );
     }
     qr/Missing required argument: issuer/, "Request with missing issuer dies";
@@ -138,7 +137,7 @@ subtest ideal => sub {
             urlRedirect  => 'http://www.ihre-domein.de/girocheckout/redirect',
             urlNotify    => 'http: //www.ihre-domein.de/girocheckout/notify',
             secret       => 'secure',
-            type         => 'ideal',
+            gateway      => 'ideal',
         );
     }
     "good request lives";
@@ -150,6 +149,5 @@ subtest ideal => sub {
       'https://payment.girosolution.de/girocheckout/api/v2/transaction/start',
       'url is good';
 };
-
 
 done_testing;

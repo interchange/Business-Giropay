@@ -10,32 +10,13 @@ use Carp;
 use Digest::HMAC_MD5 'hmac_md5_hex';
 use Business::Giropay::Types qw/Enum Int Str/;
 use Moo::Role;
+with 'Business::Giropay::Role::Gateway';
 
 requires qw(parameters uri);
 
 =head1 ATTRIBUTES
 
-=head2 type
-
-Payment type. Currently the following types are supported:
-
-=over
-
-=item * eps
-
-=item * giropay
-
-=item * ideal
-
-=back
-
 =cut
-
-has type => (
-    is       => 'ro',
-    isa      => Enum [qw( eps giropay ideal)],
-    required => 1,
-);
 
 has base_uri => (
     is      => 'ro',

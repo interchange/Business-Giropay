@@ -5,10 +5,10 @@ use aliased 'Business::Giropay::Request::Issuer';
 
 my $request;
 
-subtest 'no args and bad type' => sub {
+subtest 'no args and bad gateway' => sub {
 
     throws_ok { $request = Issuer->new }
-    qr/Missing required arguments: merchantId, projectId, secret, type/,
+    qr/Missing required arguments: gateway, merchantId, projectId, secret/,
       "Request class with no parameters method dies";
 
     throws_ok {
@@ -16,9 +16,10 @@ subtest 'no args and bad type' => sub {
             merchantId => 1234567,
             projectId  => 1234,
             secret     => 'secure',
-            type       => 'NoSuchType',
+            gateway    => 'NoSuchType',
         );
-    } qr/did not pass type constraint.+type/, "bad type dies";
+    }
+    qr/did not pass type constraint.+gateway/, "bad gateway dies";
 };
 
 subtest eps => sub {
@@ -28,7 +29,7 @@ subtest eps => sub {
             merchantId => 1234567,
             projectId  => 1234,
             secret     => 'secure',
-            type       => 'eps',
+            gateway    => 'eps',
         );
     }
     "good request lives";
@@ -41,7 +42,6 @@ subtest eps => sub {
       'url is good';
 };
 
-
 subtest giropay => sub {
 
     lives_ok {
@@ -49,7 +49,7 @@ subtest giropay => sub {
             merchantId => 1234567,
             projectId  => 1234,
             secret     => 'secure',
-            type       => 'giropay',
+            gateway    => 'giropay',
         );
     }
     "good request lives";
@@ -62,7 +62,6 @@ subtest giropay => sub {
       'url is good';
 };
 
-
 subtest ideal => sub {
 
     lives_ok {
@@ -70,7 +69,7 @@ subtest ideal => sub {
             merchantId => 1234567,
             projectId  => 1234,
             secret     => 'secure',
-            type       => 'ideal',
+            gateway    => 'ideal',
         );
     }
     "good request lives";

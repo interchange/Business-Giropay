@@ -10,7 +10,7 @@ sub parameters {
 }
 
 sub uri {
-    return shift->type . '/issuer';
+    return shift->gateway . '/issuer';
 }
 
 

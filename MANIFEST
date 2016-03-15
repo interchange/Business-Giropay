@@ -1,0 +1,15 @@
+Changes
+lib/Business/Giropay.pm
+lib/Business/Giropay/Request/Issuer.pm
+lib/Business/Giropay/Request/Bankstatus.pm
+lib/Business/Giropay/Request/Transaction.pm
+lib/Business/Giropay/Role/Request.pm
+lib/Business/Giropay/Types.pm
+Makefile.PL
+MANIFEST
+MANIFEST.SKIP
+README
+t/request/role.t
+t/request/transaction.t
+t/request/issuer.t
+t/request/bankstatus.t

@@ -12,12 +12,13 @@ WriteMakefile(
         'ExtUtils::MakeMaker' => 0,
     },
     BUILD_REQUIRES => {
-        'Test::More' => 0,
+        'Test::Exception' => 0,
+        'Test::More'      => 0,
     },
     PREREQ_PM => {
         'Digest::HMAC_MD5' => 0,
         'HTTP::Tiny'       => 0,
-        'Types::SQL'       => 0,
+        'IO::Socket::SSL'  => '1.56',
         'Type::Tiny'       => 0,
     },
     dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },

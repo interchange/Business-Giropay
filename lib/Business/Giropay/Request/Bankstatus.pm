@@ -73,13 +73,11 @@ sub parameters {
 
 Clean up data to be submitted in request to contain only safe data for testing.
 
-It is not normally necessary to call this method since it happens automatically
-if L<Business::Giropay::Role::Request/sandbox> is true.
+Does nothing for this request type.
 
 =cut
 
 sub sandbox_data {
-    shift->_set_bic('TESTDETT421');
 }
 
 =head2 uri

@@ -10,7 +10,6 @@ use Business::Giropay::Types qw/Bool Enum HashRef Int Str/;
 use Carp;
 use Digest::HMAC_MD5 'hmac_md5_hex';
 use HTTP::Tiny;
-use JSON::Any;
 use Module::Runtime 'use_module';
 
 use Moo::Role;
@@ -159,27 +158,21 @@ sub _build_url {
 
 =head2 submit
 
-Submits the request to Giropay.
+Submits the request to Giropay and returns an appropriate response object.
 
 =cut
 
 sub submit {
-    my $self          = shift;
-    my $http          = HTTP::Tiny->new( verify_SSL => 1 );
-    print Dumper( $self->data );
-    my $response      = $http->post_form( $self->url, $self->data );
-    my $content       = $response->{content};
-    my $hash          = $response->{headers}->{hash};
-    my $expected_hash = hmac_md5_hex( $content, $self->secret );
-    print "$hash\n$expected_hash\n";
+    my $self     = shift;
+    my $http     = HTTP::Tiny->new( verify_SSL => 1 );
+    my $response = $http->post_form( $self->url, $self->data );
 
-    my $response_class = $self->response_class;
-
-    print STDERR "$response_class xx\n";
-
-    use Data::Dumper::Concise;
-
-    print Dumper( JSON::Any->jsonToObj($content) );
+    return use_module( $self->response_class )->new(
+        gateway => $self->gateway,
+        hash    => $response->{headers}->{hash},
+        json    => $response->{content},
+        secret  => $self->secret,
+    );
 }
 
 1;

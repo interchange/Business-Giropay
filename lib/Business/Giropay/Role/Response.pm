@@ -8,25 +8,78 @@ Business::Giropay::Role::Response - Moo::Role consumed by all Response classes
 
 use Carp;
 use Digest::HMAC_MD5 'hmac_md5_hex';
-use Business::Giropay::Types qw/Enum Int Str/;
+use Business::Giropay::Types qw/HashRef Int Maybe Str/;
+use JSON::Any;
 use Moo::Role;
 with 'Business::Giropay::Role::Gateway';
 
 =head1 ATTRIBUTES
 
+=head2 json
+
+The json message data returned from giropay. Required.
+
 =cut
 
-has rc => (
-    is       => 'ro',
-    isa      => Int,
-    required => 1,
-);
-
-has msg => (
+has json => (
     is       => 'ro',
     isa      => Str,
     required => 1,
 );
+
+=head2 data
+
+L</json> data converted to a hash reference.
+
+=cut
+
+has data => (
+    is       => 'lazy',
+    isa      => HashRef,
+    init_arg => undef,
+);
+
+sub _build_data {
+    return JSON::Any->jsonToObj( shift->json );
+}
+
+=head2 rc
+
+Response code / error number.
+
+=cut
+
+has rc => (
+    is       => 'lazy',
+    isa      => Int,
+    init_arg => undef,
+);
+
+sub _build_rc {
+    shift->data->{rc};
+}
+
+=head2 msg
+
+Additional information on error (possibly empty).
+
+=cut
+
+has msg => (
+    is       => 'lazy',
+    isa      => Maybe [Str],
+    init_arg => undef,
+);
+
+sub _build_msg {
+    shift->data->{msg};
+}
+
+=head2 hash
+
+The HMAC hash of the returned message. Required.
+
+=cut
 
 has hash => (
     is       => 'ro',
@@ -34,21 +87,35 @@ has hash => (
     required => 1,
 );
 
-has issuer => (
+=head2 secret
+
+The Giropay shared secret for current C</merchantId> and C</projectId>,
+
+=cut
+
+has secret => (
     is       => 'ro',
-    isa      => Hashref,
+    isa      => Str,
+    required => 1,
 );
 
-sub verify_hash {
+=head1 METHODS
+
+=head2 BUILD
+
+Check that the hash matches what we expect. Die on mismatch
+
+=cut
+
+sub BUILD {
     my $self = shift;
 
-    my @parameters;
-    foreach my $param ( @{ $self->parameters } ) {
-        push @parameters, $self->$param if defined $self->$param;
-    }
-    return hmac_md5_hex(
-        join( '', $self->merchantId, $self->projectId, @parameters ),
-        $self->secret );
+    my $verify = hmac_md5_hex( $self->json, $self->secret );
+
+    croak(
+        "Returned HMAC hash ",            $self->hash,
+        " does not match expected hash ", $verify
+    ) unless $verify eq $self->hash;
 }
 
 1;

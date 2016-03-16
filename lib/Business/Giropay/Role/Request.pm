@@ -13,11 +13,14 @@ use HTTP::Tiny;
 use Module::Runtime 'use_module';
 
 use Moo::Role;
-with 'Business::Giropay::Role::Gateway';
+with 'Business::Giropay::Role::Core', 'Business::Giropay::Role::Gateway';
 
 requires qw(parameters sandbox_data uri);
 
 =head1 ATTRIBUTES
+
+See also L<Business::Giropay::Role::Core> and
+L<Business::Giropay::Role::Gateway>.
 
 =head2 base_uri
 
@@ -62,54 +65,6 @@ sub _build_data {
     }
     return $data;
 }
-
-=head2 merchantId
-
-The Giropay merchant ID.
-
-=cut
-
-has merchantId => (
-    is       => 'ro',
-    isa      => Int,
-    required => 1,
-);
-
-=head2 projectId
-
-The Giropay project ID.
-
-=cut
-
-has projectId => (
-    is       => 'ro',
-    isa      => Int,
-    required => 1,
-);
-
-=head2 sandbox
-
-Defaults to false. You should set this to true in production.
-
-=cut
-
-has sandbox => (
-    is      => 'ro',
-    isa     => Bool,
-    default => 1,
-);
-
-=head2 secret
-
-The Giropay shared secret for this L</merchantId> and L</projectId>,
-
-=cut
-
-has secret => (
-    is       => 'ro',
-    isa      => Str,
-    required => 1,
-);
 
 =head2 hash
 
@@ -168,7 +123,7 @@ sub submit {
     my $response = $http->post_form( $self->url, $self->data );
 
     return use_module( $self->response_class )->new(
-        gateway => $self->gateway,
+        network => $self->network,
         hash    => $response->{headers}->{hash},
         json    => $response->{content},
         secret  => $self->secret,

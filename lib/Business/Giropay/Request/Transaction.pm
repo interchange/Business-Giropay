@@ -169,16 +169,16 @@ See L<Business::Giropay::Role::Request/METHODS> in addition to the following:
 
 =head2 BUILD
 
-Different gateways require different attributes to be set. Check for them here.
+Different networks require different attributes to be set. Check for them here.
 
 =cut
 
 sub BUILD {
     my $self = shift;
-    if ( $self->gateway =~ /^(eps|giropay)$/ ) {
+    if ( $self->network =~ /^(eps|giropay)$/ ) {
         croak "Missing required argument: bic" unless $self->bic;
     }
-    elsif ( $self->gateway eq 'ideal' ) {
+    elsif ( $self->network eq 'ideal' ) {
         croak "Missing required argument: issuer" unless $self->issuer;
     }
 }
@@ -203,13 +203,13 @@ sub parameters {
 Clean up data to be submitted in request to contain only safe data for testing.
 
 It is not normally necessary to call this method since it happens automatically
-if L<Business::Giropay::Role::Request/sandbox> is true.
+if L<Business::Giropay::Role::Core/sandbox> is true.
 
 =cut
 
 sub sandbox_data {
     my $self = shift;
-    if ( $self->gateway eq 'ideal' ) {
+    if ( $self->network eq 'ideal' ) {
         $self->_set_issuer('RABONL2U');
     }
     else {

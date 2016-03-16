@@ -79,7 +79,7 @@ has supported => (
 
 sub _build_supported {
     my $self = shift;
-    return $self->data->{ $self->gateway };
+    return $self->data->{ $self->network };
 }
 
 =head2 giropayid

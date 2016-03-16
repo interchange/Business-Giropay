@@ -62,7 +62,7 @@ to construct the appropriate URL for the request.
 =cut
 
 sub uri {
-    return shift->gateway . '/issuer';
+    return shift->network . '/issuer';
 }
 
 1;

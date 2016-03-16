@@ -99,6 +99,22 @@ has secret => (
     required => 1,
 );
 
+=head2 success
+
+Boolean response indicating whether L</rc> indicates success.
+
+=cut
+
+has success => (
+    is => 'lazy',
+    isa => Bool,
+    init_arg => undef,
+);
+
+sub _build_success {
+    return shift->rc == 0 ? 1 : 0;
+}
+
 =head1 METHODS
 
 =head2 BUILD

@@ -1,8 +1,8 @@
-package Business::Giropay::Role::Gateway;
+package Business::Giropay::Role::Network;
 
 =head1 NAME
 
-Business::Giropay::Role::Gateway - 'gateway' role consumed by Request and Response roles
+Business::Giropay::Role::Network - 'network' role consumed by Core, Request and Response roles
 
 =cut
 
@@ -11,9 +11,9 @@ use Moo::Role;
 
 =head1 ATTRIBUTES
 
-=head2 gateway
+=head2 network
 
-Gateway type. Currently the following are supported:
+Network type. Currently the following are supported:
 
 =over
 
@@ -27,7 +27,7 @@ Gateway type. Currently the following are supported:
 
 =cut
 
-has gateway => (
+has network => (
     is       => 'ro',
     isa      => Enum [qw( eps giropay ideal)],
     required => 1,

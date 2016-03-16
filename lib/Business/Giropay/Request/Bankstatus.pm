@@ -49,14 +49,14 @@ See L<Business::Giropay::Role::Request/METHODS> in addition to the following:
 =head2 BUILD
 
 Die if this request type is not available for
-L<Business::Giropay::Role::Request/gateway>.
+L<Business::Giropay::Role::Network/network>.
 
 =cut
 
 sub BUILD {
     my $self = shift;
     croak "bankstatus request not supported by ideal"
-      if $self->gateway eq 'ideal';
+      if $self->network eq 'ideal';
 }
 
 =head2 parameters
@@ -88,7 +88,7 @@ to construct the appropriate URL for the request.
 =cut
 
 sub uri {
-    return shift->gateway . '/bankstatus';
+    return shift->network . '/bankstatus';
 }
 
 1;

@@ -76,7 +76,7 @@ Giropay are most welcome.
     );
 
     if ( $response->success ) {
-        # all is good so do stuff
+        # all is good so redirect customer to GiroCheckout
     }
     else {
         # transaction request failed

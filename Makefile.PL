@@ -16,9 +16,13 @@ WriteMakefile(
         'Test::More'      => 0,
     },
     PREREQ_PM => {
+        'Carp'             => 0,
         'Digest::HMAC_MD5' => 0,
         'HTTP::Tiny'       => 0,
         'IO::Socket::SSL'  => '1.56',
+        'JSON::Any'        => 0,
+        'Module::Runtime'  => 0,
+        'Moo'              => 0,
         'Type::Tiny'       => 0,
     },
     dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },

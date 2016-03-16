@@ -12,13 +12,30 @@ Version 0.001
 
 our $VERSION = '0.001';
 
+use Business::Giropay::Request::Bankstatus;
+use Business::Giropay::Request::Issuer;
+use Business::Giropay::Request::Transaction;
+use Business::Giropay::Notification;
+
 use Moo;
 with 'Business::Giropay::Role::Core';
 
+sub bankstatus {
+}
+
+sub issuer {
+}
+
+sub transaction {
+}
+
+sub notification {
+}
+
 =head1 DESCRIPTION
 
-B<Business::Giropay> implement's Giropay's API to make direct calls to
-Giropay's payments server.
+B<Business::Giropay> implement's Giropay's GiroCheckout API to make direct
+calls to Giropay's payments server.
 
 Giropay facilitates payments via various provider networks in addition to 
 their own. This module currently supports the following networks:
@@ -34,7 +51,7 @@ their own. This module currently supports the following networks:
 =back
 
 Contributions to allow this module to support other networks available via
-giropay are most welcome.
+Giropay are most welcome.
 
 =head1 SYNOPSIS
 
@@ -58,7 +75,7 @@ giropay are most welcome.
         urlNotify    => 'https://www.example.com/api/giropay/notify',
     );
 
-    if ( $response->rc == 0 ) {
+    if ( $response->success ) {
         # all is good so do stuff
     }
     else {
@@ -75,6 +92,85 @@ Elsewhere in your C</api/giropay/notify> route:
     else {
         # bad stuff - check out the details and tell the customer
     }
+
+=head1 ATTRIBUTES
+
+See L<Business::Giropay::Role::Core/ATTRIBUTES> for full details of the
+following attributes that can be passed to C<new>.
+
+=over
+
+=item * network
+
+=item * merchantId
+
+=item * projectId
+
+=item * sandbox
+
+=item * secret
+
+=back
+
+=head1 METHODS
+
+B<NOTE:> it is not necessary to pass in any attributes that were already
+passed to C<new> since they are passed through automatically.
+
+=head2 bankstatus %attributes
+
+This API call checks if a bank supports the giropay/eps payment method.
+
+See L<Business::Giropay::Request::Bankstatus/ATTRIBUTES> for full details of
+the following attributes that can be passed to this method:
+
+=over
+
+=item * bic
+
+=back
+
+=head2 issuer
+
+Returns a L<Business::Giropay::Response::Issuer> object which includes a
+list which contains all supported giropay/eps/ideal issuer banks.
+
+=head2 transaction %attributes
+
+This API call creates the start of a transaction and returns a
+L<Business::Giropay::Response::Transaction> object. If the response indicates
+success then customer can be redirected to
+L<Business::Giropay::Response::Transaction/redirect> to complete payment.
+
+See L<Business::Giropay::Request::Transaction/ATTRIBUTES> for full details of
+the following attributes that can be passed to this method:
+
+=over
+
+=item * merchantTxId
+
+=item * amount
+
+=item * currency
+
+=item * purpose
+
+=item * bic
+
+=item * urlRedirect
+
+=item * urlNotify
+
+=back
+
+=head2 notification %query_params
+
+Accepts query parameters and returns a L<Business::Giropay::Notification>
+object.
+
+=head1 SEE ALSO
+
+L<GiroCheckout API|http://api.girocheckout.de/en:start>
 
 =head1 TODO
 

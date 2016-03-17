@@ -34,8 +34,18 @@ sub _build_issuers {
 
 =head1 METHODS
 
-See L<Business::Giropay::Role::Response/METHODS>.
+See L<Business::Giropay::Role::Response/METHODS> for methods in addition to
+the following:
+
+=head2 has_bic $bic_code
+
+Returns true if C<$bic_code> exists as a key in L</issuers>.
 
 =cut
+
+sub has_bic {
+    my ( $self, $bic ) = @_;
+    exists $self->issuers->{$bic} ? 1 : 0;
+}
 
 1;

@@ -129,16 +129,30 @@ Giropay are most welcome.
         # transaction request failed
     }
 
-Elsewhere in your C</api/giropay/notify> route:
+Elsewhere in your C<urlNotify> route:
 
     my $notification = $giropay->notification( %request_params );
 
     if ( $notification->success ) {
-        # save stuff in DB and thank customer for purchase
+        # save stuff in DB - customer probably still on bank site
+    }
+    else {
+        # bad stuff happened - make a note of it
+    }
+
+And in the C<urlRedirect> route:
+
+    my $notification = $giropay->notification( %request_params );
+
+    if ( $notification->success ) {
+        # we should already have earlier notification but check anyway
+        # in case customer came back before we received it then thank
+        # customer for purchase
     }
     else {
         # bad stuff - check out the details and tell the customer
     }
+
 
 =head1 ATTRIBUTES
 

@@ -19,7 +19,7 @@ use Business::Giropay::Request::Transaction;
 use Business::Giropay::Notification;
 
 use Moo;
-with 'Business::Giropay::Role::Core';
+with 'Business::Giropay::Role::Core', 'Business::Giropay::Role::Network';
 
 sub bankstatus {
     my ( $self, @args ) = @_;
@@ -228,8 +228,6 @@ the following attribute that can be passed to this method:
 =item * reference
 
 =back
-
-=item
 
 =head1 SEE ALSO
 

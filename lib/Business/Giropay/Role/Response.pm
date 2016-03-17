@@ -8,10 +8,10 @@ Business::Giropay::Role::Response - Moo::Role consumed by all Response classes
 
 use Carp;
 use Digest::HMAC_MD5 'hmac_md5_hex';
-use Business::Giropay::Types qw/HashRef Int Maybe Str/;
+use Business::Giropay::Types qw/Bool HashRef Int Maybe Str/;
 use JSON::Any;
 use Moo::Role;
-with 'Business::Giropay::Role::Gateway';
+with 'Business::Giropay::Role::Network';
 
 =head1 ATTRIBUTES
 

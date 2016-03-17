@@ -43,17 +43,6 @@ sub parameters {
     return [];
 }
 
-=head2 sandbox_data \%data
-
-Clean up data to be submitted in request to contain only safe data for testing.
-
-Does nothing for this request type.
-
-=cut
-
-sub sandbox_data {
-}
-
 =head2 uri
 
 Returns the URI to be appended to L<Business::Giropay::Role::Request/base_uri>

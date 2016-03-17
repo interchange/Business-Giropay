@@ -13,14 +13,14 @@ use HTTP::Tiny;
 use Module::Runtime 'use_module';
 
 use Moo::Role;
-with 'Business::Giropay::Role::Core', 'Business::Giropay::Role::Gateway';
+with 'Business::Giropay::Role::Core', 'Business::Giropay::Role::Network';
 
-requires qw(parameters sandbox_data uri);
+requires qw(parameters uri);
 
 =head1 ATTRIBUTES
 
 See also L<Business::Giropay::Role::Core> and
-L<Business::Giropay::Role::Gateway>.
+L<Business::Giropay::Role::Network>.
 
 =head2 base_uri
 
@@ -129,5 +129,14 @@ sub submit {
         secret  => $self->secret,
     );
 }
+
+=head2 sandbox_data
+
+Individual Request class can override this method to massage data when
+L</sandbox> is true.
+
+=cut
+
+sub sandbox_data {}
 
 1;

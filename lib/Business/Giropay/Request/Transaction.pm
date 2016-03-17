@@ -210,7 +210,7 @@ if L<Business::Giropay::Role::Core/sandbox> is true.
 sub sandbox_data {
     my $self = shift;
     if ( $self->network eq 'ideal' ) {
-        $self->_set_issuer('RABONL2U');
+        $self->_set_issuer('RABOBANK');
     }
     else {
         $self->_set_bic('TESTDETT421');

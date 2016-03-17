@@ -14,6 +14,7 @@ our $VERSION = '0.001';
 
 use Business::Giropay::Request::Bankstatus;
 use Business::Giropay::Request::Issuer;
+use Business::Giropay::Request::Status;
 use Business::Giropay::Request::Transaction;
 use Business::Giropay::Notification;
 
@@ -21,15 +22,61 @@ use Moo;
 with 'Business::Giropay::Role::Core';
 
 sub bankstatus {
+    my ( $self, @args ) = @_;
+    my $request = Business::Giropay::Request::Bankstatus->new(
+        network    => $self->network,
+        merchantId => $self->merchantId,
+        projectId  => $self->projectId,
+        sandbox    => $self->sandbox,
+        secret     => $self->secret,
+        @args,
+    );
+    return $request->submit;
 }
 
 sub issuer {
+    my $self    = shift;
+    my $request = Business::Giropay::Request::Issuer->new(
+        network    => $self->network,
+        merchantId => $self->merchantId,
+        projectId  => $self->projectId,
+        sandbox    => $self->sandbox,
+        secret     => $self->secret,
+    );
+    return $request->submit;
+}
+
+sub status {
+    my ( $self, @args ) = @_;
+    my $request = Business::Giropay::Request::Status->new(
+        network    => $self->network,
+        merchantId => $self->merchantId,
+        projectId  => $self->projectId,
+        secret     => $self->secret,
+        @args,
+    );
+    return $request->submit;
 }
 
 sub transaction {
+    my ( $self, @args ) = @_;
+    my $request = Business::Giropay::Request::Transaction->new(
+        network    => $self->network,
+        merchantId => $self->merchantId,
+        projectId  => $self->projectId,
+        sandbox    => $self->sandbox,
+        secret     => $self->secret,
+        @args,
+    );
+    return $request->submit;
 }
 
 sub notification {
+    my ( $self, @args ) = @_;
+    return Business::Giropay::Notification->new(
+        secret => $self->secret,
+        @args,
+    );
 }
 
 =head1 DESCRIPTION
@@ -122,7 +169,7 @@ passed to C<new> since they are passed through automatically.
 This API call checks if a bank supports the giropay/eps payment method.
 
 See L<Business::Giropay::Request::Bankstatus/ATTRIBUTES> for full details of
-the following attributes that can be passed to this method:
+the following attribute that can be passed to this method:
 
 =over
 
@@ -168,9 +215,27 @@ the following attributes that can be passed to this method:
 Accepts query parameters and returns a L<Business::Giropay::Notification>
 object.
 
+=head2 status %attributes
+
+Returns a L<Business::Giropay::Response::Status> object with details of
+the requested transaction.
+
+See L<Business::Giropay::Request::Status/ATTRIBUTES> for full details of
+the following attribute that can be passed to this method:
+
+=over
+
+=item * reference
+
+=back
+
+=item
+
 =head1 SEE ALSO
 
-L<GiroCheckout API|http://api.girocheckout.de/en:start>
+L<GiroCheckout API|http://api.girocheckout.de/en:start> which has links for
+the various payment network types (giropay, eps, etc). For L</status> see
+L<http://api.girocheckout.de/en:tools:transaction_status>.
 
 =head1 TODO
 

@@ -5,10 +5,10 @@ use aliased 'Business::Giropay::Request::Issuer';
 
 my $request;
 
-subtest 'no args and bad gateway' => sub {
+subtest 'no args and bad network' => sub {
 
     throws_ok { $request = Issuer->new }
-    qr/Missing required arguments: gateway, merchantId, projectId, secret/,
+    qr/Missing required arguments: merchantId, network, projectId, secret/,
       "Request class with no parameters method dies";
 
     throws_ok {
@@ -16,10 +16,10 @@ subtest 'no args and bad gateway' => sub {
             merchantId => 1234567,
             projectId  => 1234,
             secret     => 'secure',
-            gateway    => 'NoSuchType',
+            network    => 'NoSuchType',
         );
     }
-    qr/did not pass type constraint.+gateway/, "bad gateway dies";
+    qr/did not pass type constraint.+network/, "bad network dies";
 };
 
 subtest eps => sub {
@@ -29,7 +29,7 @@ subtest eps => sub {
             merchantId => 1234567,
             projectId  => 1234,
             secret     => 'secure',
-            gateway    => 'eps',
+            network    => 'eps',
         );
     }
     "good request lives";
@@ -49,7 +49,7 @@ subtest giropay => sub {
             merchantId => 1234567,
             projectId  => 1234,
             secret     => 'secure',
-            gateway    => 'giropay',
+            network    => 'giropay',
         );
     }
     "good request lives";
@@ -69,7 +69,7 @@ subtest ideal => sub {
             merchantId => 1234567,
             projectId  => 1234,
             secret     => 'secure',
-            gateway    => 'ideal',
+            network    => 'ideal',
         );
     }
     "good request lives";

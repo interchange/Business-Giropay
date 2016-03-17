@@ -10,7 +10,7 @@ use Test::Exception;
 
     sub uri {
         return 'test/request';
-    };
+    }
 
     sub parameters { return [] }
 }
@@ -18,7 +18,7 @@ use Test::Exception;
 my $request;
 
 throws_ok { $request = TestRequest->new }
-qr/Missing required arguments: gateway, merchantId, projectId, secret/,
+qr/Missing required arguments: merchantId, network, projectId, secret/,
   "Request class with no parameters method dies";
 
 lives_ok {
@@ -26,7 +26,7 @@ lives_ok {
         merchantId => 1234567,
         projectId  => 1234,
         secret     => 'secure',
-        gateway       => 'eps',
+        network    => 'eps',
     );
 }
 "good request lives";

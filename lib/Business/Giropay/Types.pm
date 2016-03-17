@@ -1,5 +1,11 @@
 package Business::Giropay::Types;
 
+=head1 NAME
+
+Business::Giropay::Types - type library using Type::Tiny
+
+=cut
+
 use strict;
 use warnings;
 

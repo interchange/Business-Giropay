@@ -115,9 +115,45 @@ has issuer => (
     default => '',
 );
 
-=head2 info[1..5]Label
+=head2 info1Label
 
 Optional for giropay only.
+
+=head2 info1Text
+
+Text for L</info1Label>.
+
+=head2 info2Label
+
+Optional for giropay only.
+
+=head2 info2Text
+
+Text for L</info2Label>.
+
+=head2 info3Label
+
+Optional for giropay only.
+
+=head2 info3Text
+
+Text for L</info3Label>.
+
+=head2 info4Label
+
+Optional for giropay only.
+
+=head2 info4Text
+
+Text for L</info4Label>.
+
+=head2 info5Label
+
+Optional for giropay only.
+
+=head2 info5Text
+
+Text for L</info5Label>.
 
 =cut
 
@@ -126,12 +162,6 @@ has [qw(info1Label info2Label info3Label info4Label info5Label)] => (
     isa     => Str,    # Varchar [30]
     default => '',
 );
-
-=head2 info[1..5]Text
-
-Optional for giropay only.
-
-=cut
 
 has [qw(info1Text info2Text info3Text info4Text info5Text)] => (
     is      => 'ro',

@@ -8,7 +8,7 @@ my $request;
 subtest 'no args' => sub {
 
     throws_ok { $request = Transaction->new }
-qr/Missing required arguments: amount, currency, gateway, merchantId, merchantTxId, projectId, purpose, secret, urlNotify, urlRedirect/,
+qr/Missing required arguments: amount, currency, merchantId, merchantTxId, network, projectId, purpose, secret, urlNotify, urlRedirect/,
       "Request class with no parameters method dies";
 };
 
@@ -26,7 +26,7 @@ subtest eps => sub {
             urlRedirect  => 'http://www.ihre-domein.de/girocheckout/redirect',
             urlNotify    => 'http: //www.ihre-domein.de/girocheckout/notify',
             secret       => 'secure',
-            gateway      => 'eps',
+            network      => 'eps',
         );
     }
     qr/Missing required argument: bic/, "Request with missing bic dies";
@@ -45,7 +45,7 @@ subtest eps => sub {
             urlRedirect  => 'http://www.ihre-domein.de/girocheckout/redirect',
             urlNotify    => 'http: //www.ihre-domein.de/girocheckout/notify',
             secret       => 'secure',
-            gateway      => 'giropay',
+            network      => 'giropay',
         );
     }
     "good request lives";
@@ -72,7 +72,7 @@ subtest giropay => sub {
             urlRedirect  => 'http://www.ihre-domein.de/girocheckout/redirect',
             urlNotify    => 'http: //www.ihre-domein.de/girocheckout/notify',
             secret       => 'secure',
-            gateway      => 'giropay',
+            network      => 'giropay',
         );
     }
     qr/Missing required argument: bic/, "Request with no missing bic dies";
@@ -91,7 +91,7 @@ subtest giropay => sub {
             urlRedirect  => 'http://www.ihre-domein.de/girocheckout/redirect',
             urlNotify    => 'http: //www.ihre-domein.de/girocheckout/notify',
             secret       => 'secure',
-            gateway      => 'giropay',
+            network      => 'giropay',
         );
     }
     "good request lives";
@@ -118,7 +118,7 @@ subtest ideal => sub {
             urlRedirect  => 'http://www.ihre-domein.de/girocheckout/redirect',
             urlNotify    => 'http: //www.ihre-domein.de/girocheckout/notify',
             secret       => 'secure',
-            gateway      => 'ideal',
+            network      => 'ideal',
         );
     }
     qr/Missing required argument: issuer/, "Request with missing issuer dies";
@@ -137,7 +137,7 @@ subtest ideal => sub {
             urlRedirect  => 'http://www.ihre-domein.de/girocheckout/redirect',
             urlNotify    => 'http: //www.ihre-domein.de/girocheckout/notify',
             secret       => 'secure',
-            gateway      => 'ideal',
+            network      => 'ideal',
         );
     }
     "good request lives";

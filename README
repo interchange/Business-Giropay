@@ -79,7 +79,7 @@ METHODS
     This API call checks if a bank supports the giropay/eps payment method.
 
     See "ATTRIBUTES" in Business::Giropay::Request::Bankstatus for full
-    details of the following attributes that can be passed to this method:
+    details of the following attribute that can be passed to this method:
 
     *   bic
 
@@ -114,8 +114,19 @@ METHODS
     Accepts query parameters and returns a Business::Giropay::Notification
     object.
 
+  status %attributes
+    Returns a Business::Giropay::Response::Status object with details of the
+    requested transaction.
+
+    See "ATTRIBUTES" in Business::Giropay::Request::Status for full details
+    of the following attribute that can be passed to this method:
+
+    *   reference
+
 SEE ALSO
-    GiroCheckout API <http://api.girocheckout.de/en:start>
+    GiroCheckout API <http://api.girocheckout.de/en:start> which has links
+    for the various payment network types (giropay, eps, etc). For "status"
+    see <http://api.girocheckout.de/en:tools:transaction_status>.
 
 TODO
     Add more of Giropay's payment networks.

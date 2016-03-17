@@ -1,24 +1,24 @@
-NAME
+[1mNAME[0m
     Business::Giropay - Giropay payments API
 
-VERSION
+[1mVERSION[0m
     Version 0.001
 
-DESCRIPTION
-    Business::Giropay implement's Giropay's GiroCheckout API to make direct
+[1mDESCRIPTION[0m
+    [1mBusiness::Giropay[0m implement's Giropay's GiroCheckout API to make direct
     calls to Giropay's payments server.
 
-    Giropay facilitates payments via various provider networks in addition
-    to their own. This module currently supports the following networks:
+    Giropay facilitates payments via various provider networks in addition to
+    their own. This module currently supports the following networks:
 
     eps - EPS (Austria)
     giropay - Giropay's own network (Germany)
     ideal - iDEAL (The Netherlands)
 
-    Contributions to allow this module to support other networks available
-    via Giropay are most welcome.
+    Contributions to allow this module to support other networks available via
+    Giropay are most welcome.
 
-SYNOPSIS
+[1mSYNOPSIS[0m
         use Business::Giropay;
 
         my $giropay = Business::Giropay->new(
@@ -46,20 +46,33 @@ SYNOPSIS
             # transaction request failed
         }
 
-    Elsewhere in your "/api/giropay/notify" route:
+    Elsewhere in your "urlNotify" route:
 
         my $notification = $giropay->notification( %request_params );
 
         if ( $notification->success ) {
-            # save stuff in DB and thank customer for purchase
+            # save stuff in DB - customer probably still on bank site
+        }
+        else {
+            # bad stuff happened - make a note of it
+        }
+
+    And in the "urlRedirect" route:
+
+        my $notification = $giropay->notification( %request_params );
+
+        if ( $notification->success ) {
+            # we should already have earlier notification but check anyway
+            # in case customer came back before we received it then thank
+            # customer for purchase
         }
         else {
             # bad stuff - check out the details and tell the customer
         }
 
-ATTRIBUTES
-    See "ATTRIBUTES" in Business::Giropay::Role::Core for full details of
-    the following attributes that can be passed to "new".
+[1mATTRIBUTES[0m
+    See "ATTRIBUTES" in Business::Giropay::Role::Core for full details of the
+    following attributes that can be passed to "new".
 
     *   network
 
@@ -71,11 +84,11 @@ ATTRIBUTES
 
     *   secret
 
-METHODS
-    NOTE: it is not necessary to pass in any attributes that were already
+[1mMETHODS[0m
+    [1mNOTE:[0m it is not necessary to pass in any attributes that were already
     passed to "new" since they are passed through automatically.
 
-  bankstatus %attributes
+  [1mbankstatus %attributes[0m
     This API call checks if a bank supports the giropay/eps payment method.
 
     See "ATTRIBUTES" in Business::Giropay::Request::Bankstatus for full
@@ -83,14 +96,14 @@ METHODS
 
     *   bic
 
-  issuer
-    Returns a Business::Giropay::Response::Issuer object which includes a
-    list which contains all supported giropay/eps/ideal issuer banks.
+  [1missuer[0m
+    Returns a Business::Giropay::Response::Issuer object which includes a list
+    which contains all supported giropay/eps/ideal issuer banks.
 
-  transaction %attributes
+  [1mtransaction %attributes[0m
     This API call creates the start of a transaction and returns a
-    Business::Giropay::Response::Transaction object. If the response
-    indicates success then customer can be redirected to "redirect" in
+    Business::Giropay::Response::Transaction object. If the response indicates
+    success then customer can be redirected to "redirect" in
     Business::Giropay::Response::Transaction to complete payment.
 
     See "ATTRIBUTES" in Business::Giropay::Request::Transaction for full
@@ -110,32 +123,32 @@ METHODS
 
     *   urlNotify
 
-  notification %query_params
+  [1mnotification %query_params[0m
     Accepts query parameters and returns a Business::Giropay::Notification
     object.
 
-  status %attributes
+  [1mstatus %attributes[0m
     Returns a Business::Giropay::Response::Status object with details of the
     requested transaction.
 
-    See "ATTRIBUTES" in Business::Giropay::Request::Status for full details
-    of the following attribute that can be passed to this method:
+    See "ATTRIBUTES" in Business::Giropay::Request::Status for full details of
+    the following attribute that can be passed to this method:
 
     *   reference
 
-SEE ALSO
-    GiroCheckout API <http://api.girocheckout.de/en:start> which has links
-    for the various payment network types (giropay, eps, etc). For "status"
-    see <http://api.girocheckout.de/en:tools:transaction_status>.
+[1mSEE ALSO[0m
+    GiroCheckout API <http://api.girocheckout.de/en:start> which has links for
+    the various payment network types (giropay, eps, etc). For "status" see
+    <http://api.girocheckout.de/en:tools:transaction_status>.
 
-TODO
+[1mTODO[0m
     Add more of Giropay's payment networks.
 
-ACKNOWLEDGEMENTS
-    Many thanks to CALEVO Equestrian <https://www.calevo.com/> for
-    sponsoring development of this module.
+[1mACKNOWLEDGEMENTS[0m
+    Many thanks to CALEVO Equestrian <https://www.calevo.com/> for sponsoring
+    development of this module.
 
-LICENSE AND COPYRIGHT
+[1mLICENSE AND COPYRIGHT[0m
     Copyright 2016 Peter Mottram (SysPete) <peter@sysnix.com>
 
     This program is free software; you can redistribute it and/or modify it

@@ -91,6 +91,8 @@
   [1mbankstatus %attributes[0m
     This API call checks if a bank supports the giropay/eps payment method.
 
+    Returns a Business::Giropay::Response::Bankstatus object.
+
     See "ATTRIBUTES" in Business::Giropay::Request::Bankstatus for full
     details of the following attribute that can be passed to this method:
 
@@ -105,6 +107,8 @@
     Business::Giropay::Response::Transaction object. If the response indicates
     success then customer can be redirected to "redirect" in
     Business::Giropay::Response::Transaction to complete payment.
+
+    Returns a Business::Giropay::Response::Transaction object.
 
     See "ATTRIBUTES" in Business::Giropay::Request::Transaction for full
     details of the following attributes that can be passed to this method:

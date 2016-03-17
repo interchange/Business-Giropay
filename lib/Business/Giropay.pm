@@ -182,6 +182,8 @@ passed to C<new> since they are passed through automatically.
 
 This API call checks if a bank supports the giropay/eps payment method.
 
+Returns a L<Business::Giropay::Response::Bankstatus> object.
+
 See L<Business::Giropay::Request::Bankstatus/ATTRIBUTES> for full details of
 the following attribute that can be passed to this method:
 
@@ -202,6 +204,8 @@ This API call creates the start of a transaction and returns a
 L<Business::Giropay::Response::Transaction> object. If the response indicates
 success then customer can be redirected to
 L<Business::Giropay::Response::Transaction/redirect> to complete payment.
+
+Returns a L<Business::Giropay::Response::Transaction> object.
 
 See L<Business::Giropay::Request::Transaction/ATTRIBUTES> for full details of
 the following attributes that can be passed to this method:

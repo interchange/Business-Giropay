@@ -6,7 +6,7 @@ Business::Giropay::Response::Status - response object for L<Business::Giropay::R
 
 =cut
 
-use Business::Giropay::Types qw/Map Maybe Str/;
+use Business::Giropay::Types qw/Int Maybe Str/;
 use Moo;
 with 'Business::Giropay::Role::Response';
 use namespace::clean;

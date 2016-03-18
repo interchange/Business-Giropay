@@ -13,6 +13,7 @@ WriteMakefile(
         'ExtUtils::MakeMaker' => 0,
     },
     BUILD_REQUIRES => {
+        'aliased'         => 0,
         'Test::Exception' => 0,
         'Test::More'      => 0,
     },

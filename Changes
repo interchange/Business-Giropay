@@ -1,5 +1,10 @@
 Revision history for Business-Giropay
 
+0.002 Fri 18 Mar 10:35:51 CET 2016
+
+    * add missing build dependency on 'aliased'
+    * POD improvements
+
 0.001 Thu 17 Mar 16:41:46 CET 2016
 
     * Initial release

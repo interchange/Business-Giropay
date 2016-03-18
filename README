@@ -1,24 +1,24 @@
-[1mNAME[0m
+NAME
     Business::Giropay - Giropay payments API
 
-[1mVERSION[0m
-    Version 0.001
+VERSION
+    Version 0.002
 
-[1mDESCRIPTION[0m
-    [1mBusiness::Giropay[0m implement's Giropay's GiroCheckout API to make direct
+DESCRIPTION
+    Business::Giropay implement's Giropay's GiroCheckout API to make direct
     calls to Giropay's payments server.
 
-    Giropay facilitates payments via various provider networks in addition to
-    their own. This module currently supports the following networks:
+    Giropay facilitates payments via various provider networks in addition
+    to their own. This module currently supports the following networks:
 
     eps - EPS (Austria)
     giropay - Giropay's own network (Germany)
     ideal - iDEAL (The Netherlands)
 
-    Contributions to allow this module to support other networks available via
-    Giropay are most welcome.
+    Contributions to allow this module to support other networks available
+    via Giropay are most welcome.
 
-[1mSYNOPSIS[0m
+SYNOPSIS
         use Business::Giropay;
 
         my $giropay = Business::Giropay->new(
@@ -70,9 +70,9 @@
             # bad stuff - check out the details and tell the customer
         }
 
-[1mATTRIBUTES[0m
-    See "ATTRIBUTES" in Business::Giropay::Role::Core for full details of the
-    following attributes that can be passed to "new".
+ATTRIBUTES
+    See "ATTRIBUTES" in Business::Giropay::Role::Core for full details of
+    the following attributes that can be passed to "new".
 
     *   network
 
@@ -84,11 +84,11 @@
 
     *   secret
 
-[1mMETHODS[0m
-    [1mNOTE:[0m it is not necessary to pass in any attributes that were already
+METHODS
+    NOTE: it is not necessary to pass in any attributes that were already
     passed to "new" since they are passed through automatically.
 
-  [1mbankstatus %attributes[0m
+  bankstatus %attributes
     This API call checks if a bank supports the giropay/eps payment method.
 
     Returns a Business::Giropay::Response::Bankstatus object.
@@ -98,14 +98,14 @@
 
     *   bic
 
-  [1missuer[0m
-    Returns a Business::Giropay::Response::Issuer object which includes a list
-    which contains all supported giropay/eps/ideal issuer banks.
+  issuer
+    Returns a Business::Giropay::Response::Issuer object which includes a
+    list which contains all supported giropay/eps/ideal issuer banks.
 
-  [1mtransaction %attributes[0m
+  transaction %attributes
     This API call creates the start of a transaction and returns a
-    Business::Giropay::Response::Transaction object. If the response indicates
-    success then customer can be redirected to "redirect" in
+    Business::Giropay::Response::Transaction object. If the response
+    indicates success then customer can be redirected to "redirect" in
     Business::Giropay::Response::Transaction to complete payment.
 
     Returns a Business::Giropay::Response::Transaction object.
@@ -127,32 +127,32 @@
 
     *   urlNotify
 
-  [1mnotification %query_params[0m
+  notification %query_params
     Accepts query parameters and returns a Business::Giropay::Notification
     object.
 
-  [1mstatus %attributes[0m
+  status %attributes
     Returns a Business::Giropay::Response::Status object with details of the
     requested transaction.
 
-    See "ATTRIBUTES" in Business::Giropay::Request::Status for full details of
-    the following attribute that can be passed to this method:
+    See "ATTRIBUTES" in Business::Giropay::Request::Status for full details
+    of the following attribute that can be passed to this method:
 
     *   reference
 
-[1mSEE ALSO[0m
-    GiroCheckout API <http://api.girocheckout.de/en:start> which has links for
-    the various payment network types (giropay, eps, etc). For "status" see
-    <http://api.girocheckout.de/en:tools:transaction_status>.
+SEE ALSO
+    GiroCheckout API <http://api.girocheckout.de/en:start> which has links
+    for the various payment network types (giropay, eps, etc). For "status"
+    see <http://api.girocheckout.de/en:tools:transaction_status>.
 
-[1mTODO[0m
+TODO
     Add more of Giropay's payment networks.
 
-[1mACKNOWLEDGEMENTS[0m
-    Many thanks to CALEVO Equestrian <https://www.calevo.com/> for sponsoring
-    development of this module.
+ACKNOWLEDGEMENTS
+    Many thanks to CALEVO Equestrian <https://www.calevo.com/> for
+    sponsoring development of this module.
 
-[1mLICENSE AND COPYRIGHT[0m
+LICENSE AND COPYRIGHT
     Copyright 2016 Peter Mottram (SysPete) <peter@sysnix.com>
 
     This program is free software; you can redistribute it and/or modify it

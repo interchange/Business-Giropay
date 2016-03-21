@@ -24,7 +24,7 @@ WriteMakefile(
         'IO::Socket::SSL'  => '1.56',    # needed by HTTP::Tiny for https
         'JSON::Any'        => 0,
         'Module::Runtime'  => 0,
-        'Moo'              => 0,
+        'Moo'              => '1.001000',
         'namespace::clean' => 0,
         'Type::Tiny'       => 0,
     },

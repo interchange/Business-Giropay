@@ -1,5 +1,11 @@
 Revision history for Business-Giropay
 
+0.003 Mon 21 Mar 13:10:24 CET 2016
+
+    * bump dep on Moo to 1st release that allowed non-ref default values
+    * add response tests
+    * bump dep on Test::More to 0.94 since we use subtest
+
 0.002 Fri 18 Mar 10:35:51 CET 2016
 
     * add missing build dependency on 'aliased'

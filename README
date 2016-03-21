@@ -2,7 +2,7 @@ NAME
     Business::Giropay - Giropay payments API
 
 VERSION
-    Version 0.002
+    Version 0.003
 
 DESCRIPTION
     Business::Giropay implement's Giropay's GiroCheckout API to make direct

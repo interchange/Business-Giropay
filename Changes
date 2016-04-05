@@ -1,5 +1,12 @@
 Revision history for Business-Giropay
 
+0.100 Tue  5 Apr 11:26:10 CEST 2016
+
+    * add Role::Urls
+    * urlRedirect and urlNotify can now be set in Business::Giropay->new
+      and will be used by call to transaction
+    * add tests missing from MANIFEST
+
 0.003 Mon 21 Mar 13:10:24 CET 2016
 
     * bump dep on Moo to 1st release that allowed non-ref default values

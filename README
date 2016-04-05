@@ -2,7 +2,7 @@ NAME
     Business::Giropay - Giropay payments API
 
 VERSION
-    Version 0.003
+    Version 0.100
 
 DESCRIPTION
     Business::Giropay implement's Giropay's GiroCheckout API to make direct
@@ -37,6 +37,35 @@ SYNOPSIS
             bic          => 'TESTDETT421',
             urlRedirect  => 'https://www.example.com/return_page',
             urlNotify    => 'https://www.example.com/api/giropay/notify',
+        );
+
+        if ( $response->success ) {
+            # all is good so redirect customer to GiroCheckout
+        }
+        else {
+            # transaction request failed
+        }
+
+    "urlRedirect" and "urlNotify" can also be passed to "new":
+
+        use Business::Giropay;
+
+        my $giropay = Business::Giropay->new(
+            network     => 'giropay',
+            merchantId  => '123456789',
+            projectId   => '1234567',
+            urlRedirect => 'https://www.example.com/return_page',
+            urlNotify   => 'https://www.example.com/api/giropay/notify',
+            sandbox     => 1,
+            secret      => 'project_secret',
+        );
+
+        my $response = $giropay->transaction(
+            merchantTxId => 'tx-10928374',
+            amount       => 2938,               # 29.38 in cents
+            currency     => 'EUR',
+            purpose      => 'Test Transaction',
+            bic          => 'TESTDETT421',
         );
 
         if ( $response->success ) {
@@ -83,6 +112,13 @@ ATTRIBUTES
     *   sandbox
 
     *   secret
+
+    See "ATTRIBUTES" in Business::Giropay::Role::Urls for full details of
+    the following attributes that can be passed to "new".
+
+    *   urlRedirect
+
+    *   urlNotify
 
 METHODS
     NOTE: it is not necessary to pass in any attributes that were already

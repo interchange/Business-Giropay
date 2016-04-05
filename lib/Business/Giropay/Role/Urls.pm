@@ -20,7 +20,6 @@ Shop URL to which the customer is to be sent after the payment.
 has urlRedirect => (
     is       => 'ro',
     isa      => Str,
-    required => 1,
 );
 
 =head2 urlNotify
@@ -32,7 +31,6 @@ Shop URL to which the outgoing payment is reported.
 has urlNotify => (
     is       => 'ro',
     isa      => Str,
-    required => 1,
 );
 
 1;

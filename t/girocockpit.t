@@ -70,6 +70,34 @@ subtest 'EPS' => sub {
     like $response->reference, qr{\w+}, "reference looks good";
     like $response->redirect, qr{^https*://.+},
       "redirect looks good: " . $response->redirect;
+
+    lives_ok {
+        $giropay = Business::Giropay->new(
+            network     => 'eps',
+            merchantId  => $ENV{merchantId},
+            projectId   => $ENV{eps_projectId},
+            secret      => $ENV{eps_secret},
+            urlRedirect => 'http://www.example.com/redirect',
+            urlNotify   => 'http://www.example.com/notify',
+          )
+    }
+    "new EPS giropay object with urlRedirect and urlNotify lives";
+
+    lives_ok {
+        $response = $giropay->transaction(
+            merchantTxId => '123456789',
+            amount       => 100,
+            currency     => 'EUR',
+            purpose      => 'Test Transaction',
+            bic          => 'HYPTAT22XXX',
+        );
+    }
+    "transaction request lives";
+
+    ok $response->success, "response success" or diag explain $response;
+    like $response->reference, qr{\w+}, "reference looks good";
+    like $response->redirect, qr{^https*://.+},
+      "redirect looks good: " . $response->redirect;
 };
 
 subtest 'Giropay' => sub {
@@ -125,6 +153,34 @@ subtest 'Giropay' => sub {
     like $response->reference, qr{\w+}, "reference looks good";
     like $response->redirect, qr{^https*://.+},
       "redirect looks good: " . $response->redirect;
+
+    lives_ok {
+        $giropay = Business::Giropay->new(
+            network     => 'giropay',
+            merchantId  => $ENV{merchantId},
+            projectId   => $ENV{giropay_projectId},
+            secret      => $ENV{giropay_secret},
+            urlRedirect => 'http://www.example.com/redirect',
+            urlNotify   => 'http://www.example.com/notify',
+          )
+    }
+    "new Giropay giropay object with urlRedirect and urlNotify lives";
+
+    lives_ok {
+        $response = $giropay->transaction(
+            merchantTxId => '123456789',
+            amount       => 100,
+            currency     => 'EUR',
+            purpose      => 'Test Transaction',
+            bic          => 'TESTDETT421',
+        );
+    }
+    "transaction request lives";
+
+    ok $response->success, "response success" or diag explain $response;
+    like $response->reference, qr{\w+}, "reference looks good";
+    like $response->redirect, qr{^https*://.+},
+      "redirect looks good: " . $response->redirect;
 };
 
 subtest 'iDeal' => sub {
@@ -166,6 +222,34 @@ subtest 'iDeal' => sub {
             issuer       => 'RABOBANK',
             urlRedirect  => 'http://www.example.com/redirect',
             urlNotify    => 'http://www.example.com/notify',
+        );
+    }
+    "transaction request lives";
+
+    ok $response->success, "response success" or diag explain $response;
+    like $response->reference, qr{\w+}, "reference looks good";
+    like $response->redirect, qr{^https*://.+},
+      "redirect looks good: " . $response->redirect;
+
+    lives_ok {
+        $giropay = Business::Giropay->new(
+            network     => 'ideal',
+            merchantId  => $ENV{merchantId},
+            projectId   => $ENV{ideal_projectId},
+            secret      => $ENV{ideal_secret},
+            urlRedirect => 'http://www.example.com/redirect',
+            urlNotify   => 'http://www.example.com/notify',
+          )
+    }
+    "new iDEAL giropay object with urlRedirect and urlNotify lives";
+
+    lives_ok {
+        $response = $giropay->transaction(
+            merchantTxId => '123456789',
+            amount       => 100,
+            currency     => 'EUR',
+            purpose      => 'Test Transaction',
+            issuer       => 'RABOBANK',
         );
     }
     "transaction request lives";

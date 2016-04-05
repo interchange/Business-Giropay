@@ -15,7 +15,7 @@ use namespace::clean;
 =head1 ATTRIBUTES
 
 See L<Business::Giropay::Role::Request/ATTRIBUTES> for attributes common to
-all request classes and L<Business::Giropay::Role::Urls/ATTRIBUTES>.
+all request classes and also L<Business::Giropay::Role::Urls/ATTRIBUTES>.
 
 =head2 response_class
 
@@ -167,6 +167,26 @@ has [qw(info1Text info2Text info3Text info4Text info5Text)] => (
     is      => 'ro',
     isa     => Str,    # Varchar [80]
     default => '',
+);
+
+=head2 urlRedirect
+
+Override to make it required.
+
+=cut
+
+has '+urlRedirect' => (
+    required => 1,
+);
+
+=head2 urlNotify
+
+Shop URL to which the outgoing payment is reported.
+
+=cut
+
+has '+urlNotify' => (
+    required => 1,
 );
 
 =head1 METHODS

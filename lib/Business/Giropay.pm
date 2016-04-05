@@ -62,11 +62,13 @@ sub status {
 sub transaction {
     my ( $self, @args ) = @_;
     my $request = Business::Giropay::Request::Transaction->new(
-        network    => $self->network,
-        merchantId => $self->merchantId,
-        projectId  => $self->projectId,
-        sandbox    => $self->sandbox,
-        secret     => $self->secret,
+        network     => $self->network,
+        merchantId  => $self->merchantId,
+        projectId   => $self->projectId,
+        sandbox     => $self->sandbox,
+        secret      => $self->secret,
+        urlRedirect => $self->urlRedirect,
+        urlNotify   => $self->urlNotify,
         @args,
     );
     return $request->submit;
@@ -130,6 +132,36 @@ Giropay are most welcome.
         # transaction request failed
     }
 
+C<urlRedirect> and C<urlNotify> can also be passed to C<new>:
+
+    use Business::Giropay;
+
+    my $giropay = Business::Giropay->new(
+        network     => 'giropay',
+        merchantId  => '123456789',
+        projectId   => '1234567',
+        urlRedirect => 'https://www.example.com/return_page',
+        urlNotify   => 'https://www.example.com/api/giropay/notify',
+        sandbox     => 1,
+        secret      => 'project_secret',
+    );
+
+    my $response = $giropay->transaction(
+        merchantTxId => 'tx-10928374',
+        amount       => 2938,               # 29.38 in cents
+        currency     => 'EUR',
+        purpose      => 'Test Transaction',
+        bic          => 'TESTDETT421',
+    );
+
+    if ( $response->success ) {
+        # all is good so redirect customer to GiroCheckout
+    }
+    else {
+        # transaction request failed
+    }
+
+
 Elsewhere in your C<urlNotify> route:
 
     my $notification = $giropay->notification( %request_params );
@@ -171,6 +203,17 @@ following attributes that can be passed to C<new>.
 =item * sandbox
 
 =item * secret
+
+=back
+
+See L<Business::Giropay::Role::Urls/ATTRIBUTES> for full details of the
+following attributes that can be passed to C<new>.
+
+=over
+
+=item * urlRedirect
+
+=item * urlNotify
 
 =back
 

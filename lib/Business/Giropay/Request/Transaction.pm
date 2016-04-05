@@ -9,13 +9,13 @@ Business::Giropay::Request::Transaction - start payment transaction request
 use Business::Giropay::Types qw/Int Maybe Str/;
 use Carp;
 use Moo;
-with 'Business::Giropay::Role::Request';
+with 'Business::Giropay::Role::Request', 'Business::Giropay::Role::Urls';
 use namespace::clean;
 
 =head1 ATTRIBUTES
 
 See L<Business::Giropay::Role::Request/ATTRIBUTES> for attributes common to
-all request classes.
+all request classes and L<Business::Giropay::Role::Urls/ATTRIBUTES>.
 
 =head2 response_class
 
@@ -167,30 +167,6 @@ has [qw(info1Text info2Text info3Text info4Text info5Text)] => (
     is      => 'ro',
     isa     => Str,    # Varchar [80]
     default => '',
-);
-
-=head2 urlRedirect
-
-Shop URL to which the customer is to be sent after the payment.
-
-=cut
-
-has urlRedirect => (
-    is       => 'ro',
-    isa      => Str,
-    required => 1,
-);
-
-=head2 urlNotify
-
-Shop URL to which the outgoing payment is reported.
-
-=cut
-
-has urlNotify => (
-    is       => 'ro',
-    isa      => Str,
-    required => 1,
 );
 
 =head1 METHODS

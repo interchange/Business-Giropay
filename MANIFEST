@@ -13,6 +13,7 @@ lib/Business/Giropay/Role/Core.pm
 lib/Business/Giropay/Role/Network.pm
 lib/Business/Giropay/Role/Response.pm
 lib/Business/Giropay/Role/Request.pm
+lib/Business/Giropay/Role/Urls.pm
 lib/Business/Giropay/Types.pm
 Makefile.PL
 MANIFEST
@@ -26,3 +27,6 @@ t/request/role.t
 t/request/transaction.t
 t/request/issuer.t
 t/request/bankstatus.t
+t/response/transaction.t
+t/response/issuer.t
+t/response/bankstatus.t

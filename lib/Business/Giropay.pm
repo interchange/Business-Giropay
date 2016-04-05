@@ -19,7 +19,8 @@ use Business::Giropay::Request::Transaction;
 use Business::Giropay::Notification;
 
 use Moo;
-with 'Business::Giropay::Role::Core', 'Business::Giropay::Role::Network';
+with 'Business::Giropay::Role::Core', 'Business::Giropay::Role::Network',
+  'Business::Giropay::Role::Urls';
 
 sub bankstatus {
     my ( $self, @args ) = @_;

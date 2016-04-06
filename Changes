@@ -1,5 +1,12 @@
 Revision history for Business-Giropay
 
+0.101 Wed  6 Apr 14:45:29 CEST 2016
+
+    * add message attribute to Notification class
+    * pass merchantId and projectId in main class notification method
+    * add Core role to Notification class
+    * add returned json to error in Response hmac mismatch
+
 0.100 Tue  5 Apr 11:26:10 CEST 2016
 
     * add Role::Urls

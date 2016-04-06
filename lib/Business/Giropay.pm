@@ -6,11 +6,11 @@ Business::Giropay - Giropay payments API
 
 =head1 VERSION
 
-Version 0.100
+Version 0.101
 
 =cut
 
-our $VERSION = '0.100';
+our $VERSION = '0.101';
 
 use Business::Giropay::Request::Bankstatus;
 use Business::Giropay::Request::Issuer;

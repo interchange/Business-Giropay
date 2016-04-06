@@ -77,7 +77,9 @@ sub transaction {
 sub notification {
     my ( $self, @args ) = @_;
     return Business::Giropay::Notification->new(
-        secret => $self->secret,
+        merchantId => $self->merchantId,
+        projectId  => $self->projectId,
+        secret     => $self->secret,
         @args,
     );
 }

@@ -129,8 +129,8 @@ sub BUILD {
     my $verify = hmac_md5_hex( $self->json, $self->secret );
 
     croak(
-        "Returned HMAC hash ",            $self->hash,
-        " does not match expected hash ", $verify
+        "Returned HMAC hash ", $self->hash,
+        " does not match expected hash ", $verify, " for json ", $self->json
     ) unless $verify eq $self->hash;
 }
 

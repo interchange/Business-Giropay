@@ -10,6 +10,7 @@ use Carp;
 use Digest::HMAC_MD5 'hmac_md5_hex';
 use Business::Giropay::Types qw/Int Str/;
 use Moo;
+with 'Business::Giropay::Role::Core';
 use namespace::clean;
 
 =head1 ATTRIBUTES

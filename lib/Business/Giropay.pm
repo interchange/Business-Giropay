@@ -21,6 +21,7 @@ use Business::Giropay::Notification;
 use Moo;
 with 'Business::Giropay::Role::Core', 'Business::Giropay::Role::Network',
   'Business::Giropay::Role::Urls';
+use namespace::clean;
 
 sub bankstatus {
     my ( $self, @args ) = @_;

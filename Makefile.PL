@@ -22,7 +22,7 @@ WriteMakefile(
         'Digest::HMAC_MD5' => 0,
         'HTTP::Tiny'       => 0,
         'IO::Socket::SSL'  => '1.56',    # needed by HTTP::Tiny for https
-        'JSON::Any'        => 0,
+        'JSON::MayebXS'    => 0,
         'Module::Runtime'  => 0,
         'Moo'              => '1.001000',
         'namespace::clean' => 0,

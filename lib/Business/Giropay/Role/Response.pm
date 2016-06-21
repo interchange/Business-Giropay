@@ -9,7 +9,7 @@ Business::Giropay::Role::Response - Moo::Role consumed by all Response classes
 use Carp;
 use Digest::HMAC_MD5 'hmac_md5_hex';
 use Business::Giropay::Types qw/Bool HashRef Int Maybe Str/;
-use JSON::Any;
+use JSON::MaybeXS;
 use Moo::Role;
 with 'Business::Giropay::Role::Network';
 
@@ -40,7 +40,7 @@ has data => (
 );
 
 sub _build_data {
-    return JSON::Any->jsonToObj( shift->json );
+    return decode_json( shift->json );
 }
 
 =head2 rc

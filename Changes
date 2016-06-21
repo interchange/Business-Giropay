@@ -1,5 +1,9 @@
 Revision history for Business-Giropay
 
+0.102 Tue 21 Jun 16:34:29 CEST 2016
+
+    * switch from deprecated JSON::Any to JSON::MaybeXS
+
 0.101 Wed  6 Apr 14:45:29 CEST 2016
 
     * add message attribute to Notification class

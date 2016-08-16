@@ -304,6 +304,14 @@ L<http://api.girocheckout.de/en:tools:transaction_status>.
 
 Add more of Giropay's payment networks.
 
+=head1 AUTHOR
+
+  Peter Mottram (SysPete) <peter@sysnix.com>
+
+=head1 CONTRIBUTORS
+
+  Alexandr Ciornii (chorny)
+
 =head1 ACKNOWLEDGEMENTS
 
 Many thanks to L<CALEVO Equestrian|https://www.calevo.com/> for sponsoring

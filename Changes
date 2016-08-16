@@ -1,5 +1,9 @@
 Revision history for Business-Giropay
 
+0.103 Tue 16 Aug 17:31:59 CEST 2016
+
+    * correct name for JSON::MaybeXS in deps (GH#1, Alexandr Ciornii)
+
 0.102 Tue 21 Jun 16:34:29 CEST 2016
 
     * switch from deprecated JSON::Any to JSON::MaybeXS
